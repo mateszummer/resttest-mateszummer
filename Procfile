@@ -1,1 +1,1 @@
-web: java -jar target/com/codecool/language/mateszummer/Srv.class
+web: java -jar -Dserver.port=$PORT  target/language-test-1.0-SNAPSHOT.jar
