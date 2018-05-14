@@ -2,7 +2,6 @@ package com.codecool.language.mateszummer.RestApi;
 
 import com.codecool.language.mateszummer.Service.FoodAndDrinkService;
 import com.codecool.language.mateszummer.Service.FoodAndDrinkTypeService;
-import com.codecool.language.mateszummer.dontaddthistogit;
 import com.codecool.language.mateszummer.model.FoodAndDrinkType;
 import com.google.gson.Gson;
 
@@ -11,15 +10,19 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class FoodAndDrinkRest {
+
+    @Value("androidKey")
+    String androidKey;
+
+    @Value("firebaseSrvKey")
+    String firebaseSrvKey;
 
     @Autowired
     FoodAndDrinkService foodAndDrinkService;
@@ -76,10 +79,10 @@ public class FoodAndDrinkRest {
                     dataJson.put("body",msg);
                     dataJson.put("title","random title");
                     json.put("notification",dataJson);
-                    json.put("to",dontaddthistogit.androidKey);
+                    json.put("to",androidKey);
                     com.squareup.okhttp.RequestBody body = com.squareup.okhttp.RequestBody.create(JSON,json.toString());
                     Request request = new Request.Builder()
-                            .header("Authorization", dontaddthistogit.firebaseSrvKey)
+                            .header("Authorization",firebaseSrvKey)
                             .url("https://fcm.googleapis.com/fcm/send")
                             .post(body)
                             .build();
