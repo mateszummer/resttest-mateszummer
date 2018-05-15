@@ -2,7 +2,9 @@ package com.codecool.language.mateszummer.Service;
 
 
 import com.codecool.language.mateszummer.Repository.CategoryRepo;
+import com.codecool.language.mateszummer.Repository.DrinksRepo;
 import com.codecool.language.mateszummer.model.Category;
+import com.codecool.language.mateszummer.model.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class CategoryService {
 
     @Autowired
     CategoryRepo categoryRepo;
+
+    @Autowired
+    DrinksRepo drinksRepo;
 
     public List<Category> getAll() {
         return categoryRepo.findAll();
@@ -26,7 +31,10 @@ public class CategoryService {
         categoryRepo.save(new Category(name));
     }
 
-    public void deleteDrinkByName(String name) {
-        categoryRepo.delete(getCategoryByName(name));
+    public void deleteCategoryByName(String name) {
+        Category category = getCategoryByName(name);
+        drinksRepo.delete(category.getDrinkList());
+        categoryRepo.delete(category);
+
     }
 }

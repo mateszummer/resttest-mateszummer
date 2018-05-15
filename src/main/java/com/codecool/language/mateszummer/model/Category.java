@@ -13,16 +13,22 @@ public class Category {
 
     private String name;
 
+    public List<Drink> getDrinkList() {
+        return drinkList;
+    }
+
     @OneToMany
-    private transient List<Drinks> drinksList = new ArrayList<Drinks>();
+    private transient List<Drink> drinkList = new ArrayList<Drink>();
 
     public Category(String name) {
         this.name = name;
     }
 
-    public void addFoodAndDrink(Drinks drinks) {
-        drinksList.add(drinks);
+    public void addDrinkToCategory(Drink drink) {
+        drinkList.add(drink);
     }
+
+    public void removeDrinkFromCategory(Drink drink) {drinkList.remove(drink);}
 
     public Category() {
     }

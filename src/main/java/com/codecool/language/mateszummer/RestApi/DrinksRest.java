@@ -36,32 +36,32 @@ public class DrinksRest {
     }
 
     @RequestMapping(value = "/getDrinksByCategory/{category}", method = RequestMethod.GET)
-    public String getFoodAndDrinkByType(@PathVariable("category") String inCategory) {
+    public String getDrinkByCategory(@PathVariable("category") String inCategory) {
         Category category = categoryService.getCategoryByName(inCategory);
         Gson gson = new Gson();
         return gson.toJson(drinksService.getAllByCategory(category));
     }
 
-    @RequestMapping(value = "/getTypes", method = RequestMethod.GET)
-    public String getType() {
+    @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+    public String getCategories() {
         Gson gson = new Gson();
         return gson.toJson(categoryService.getAll());
     }
 
     @RequestMapping(value = "/deleteDrink", method = RequestMethod.POST)
-    public void deleteFoodAndDrink(@RequestParam("name") String name) {
+    public void deleteDrink(@RequestParam("name") String name) {
         drinksService.deleteDrinkByName(name);
     }
 
     @RequestMapping(value = "/deleteCategory", method = RequestMethod.POST)
-    public void deleteType(@RequestParam("Type") String type) {
-        categoryService.deleteDrinkByName(type);
+    public void deleteCategory(@RequestParam("category") String category) {
+        categoryService.deleteCategoryByName(category);
     }
 
     @RequestMapping(value = "/addDrink", method = RequestMethod.POST)
-    public void addFoodAndDrink(@RequestParam("name") String name,
-                                @RequestParam("price") Integer price,
-                                @RequestParam("category") String inCategory) {
+    public void addDrink(@RequestParam("name") String name,
+                         @RequestParam("price") Integer price,
+                         @RequestParam("category") String inCategory) {
         Category category = categoryService.getCategoryByName(inCategory);
         if (category == null) {
             categoryService.addCategory(inCategory);
