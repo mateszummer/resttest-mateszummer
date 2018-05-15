@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class FoodAndDrink {
+public class Drinks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,17 +15,18 @@ public class FoodAndDrink {
     private String name;
     private Integer price;
 
-    @OneToMany
-    private FoodAndDrinkType foodAndDrinkType;
+    @ManyToOne
+    private Category category;
 
 
-    public FoodAndDrink() {
+    public Drinks() {
     }
 
-    public FoodAndDrink(String name, Integer price, FoodAndDrinkType foodAndDrinkType) {
+    public Drinks(String name, Integer price, Category category) {
         this.name = name;
         this.price = price;
-        this.foodAndDrinkType = foodAndDrinkType;
+        this.category = category;
+        category.addFoodAndDrink(this);
     }
 
     public Integer getId() {

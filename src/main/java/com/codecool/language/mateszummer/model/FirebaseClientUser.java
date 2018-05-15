@@ -1,15 +1,13 @@
 package com.codecool.language.mateszummer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "firebaseClient")
 public class FirebaseClientUser {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private Integer id;
 
     private Integer table;
@@ -28,7 +26,7 @@ public class FirebaseClientUser {
     }
 
 
-    public void FirebaseClientUser(){}
+    public FirebaseClientUser(){}
 
     public FirebaseClientUser(Integer table, String appKey) {
         this.table = table;

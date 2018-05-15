@@ -13,5 +13,4 @@ public class FirebaseClientService {
 
     public void regUser(Integer table, String apiKey) {
         firebaseClientUserRepo.save(new FirebaseClientUser(table, apiKey));
-    }
-}
+    }}

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @SpringBootApplication
-public class Srv extends WebMvcConfigurerAdapter {
+public class Srv {
 
     public static void main(String[] args) {
         SpringApplication.run(Srv.class, args);

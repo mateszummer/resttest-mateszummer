@@ -1,13 +1,13 @@
 package com.codecool.language.mateszummer.RestApi;
 
-import com.codecool.language.mateszummer.Service.FoodAndDrinkService;
-import com.codecool.language.mateszummer.Service.FoodAndDrinkTypeService;
-import com.codecool.language.mateszummer.model.FoodAndDrinkType;
+import com.codecool.language.mateszummer.Service.DrinksService;
+import com.codecool.language.mateszummer.Service.CategoryService;
+import com.codecool.language.mateszummer.model.Category;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;;
+import com.squareup.okhttp.Request;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-public class FoodAndDrinkRest {
+public class DrinksRest {
 
     @Value("androidKey")
     String androidKey;
@@ -25,49 +25,49 @@ public class FoodAndDrinkRest {
     String firebaseSrvKey;
 
     @Autowired
-    FoodAndDrinkService foodAndDrinkService;
+    DrinksService drinksService;
     @Autowired
-    FoodAndDrinkTypeService foodAndDrinkTypeService;
+    CategoryService categoryService;
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public String getAll() {
         Gson gson = new Gson();
-        return gson.toJson(foodAndDrinkService.getAll());
+        return gson.toJson(drinksService.getAll());
     }
 
-    @RequestMapping(value = "/getFoodAndDrinkByType/{type}", method = RequestMethod.GET)
-    public String getFoodAndDrinkByType(@PathVariable("type") String type) {
-        FoodAndDrinkType foodAndDrinkType = foodAndDrinkTypeService.searchTypeByName(type);
+    @RequestMapping(value = "/getDrinksByCategory/{category}", method = RequestMethod.GET)
+    public String getFoodAndDrinkByType(@PathVariable("category") String inCategory) {
+        Category category = categoryService.getCategoryByName(inCategory);
         Gson gson = new Gson();
-        return gson.toJson(foodAndDrinkService.getAllByType(foodAndDrinkType));
+        return gson.toJson(drinksService.getAllByCategory(category));
     }
 
     @RequestMapping(value = "/getTypes", method = RequestMethod.GET)
     public String getType() {
         Gson gson = new Gson();
-        return gson.toJson(foodAndDrinkTypeService.getAll());
+        return gson.toJson(categoryService.getAll());
     }
 
-    @RequestMapping(value = "/deleteFoodAndDrink", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteDrink", method = RequestMethod.POST)
     public void deleteFoodAndDrink(@RequestParam("name") String name) {
-        foodAndDrinkService.deleteFoodAndDrinkByName(name);
+        drinksService.deleteDrinkByName(name);
     }
 
-    @RequestMapping(value = "/deleteType", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteCategory", method = RequestMethod.POST)
     public void deleteType(@RequestParam("Type") String type) {
-        foodAndDrinkTypeService.deleteFoodAndDrinkTypeByName(type);
+        categoryService.deleteDrinkByName(type);
     }
 
-    @RequestMapping(value = "/addFoodAndDrink", method = RequestMethod.POST)
+    @RequestMapping(value = "/addDrink", method = RequestMethod.POST)
     public void addFoodAndDrink(@RequestParam("name") String name,
                                 @RequestParam("price") Integer price,
-                                @RequestParam("Type") String foodAndDrinkTypeName) {
-        FoodAndDrinkType foodAndDrinkType = foodAndDrinkTypeService.searchTypeByName(foodAndDrinkTypeName);
-        if (foodAndDrinkType == null) {
-            foodAndDrinkTypeService.addFoodAndDrinkType(foodAndDrinkTypeName);
-            foodAndDrinkType = foodAndDrinkTypeService.searchTypeByName(foodAndDrinkTypeName);
+                                @RequestParam("category") String inCategory) {
+        Category category = categoryService.getCategoryByName(inCategory);
+        if (category == null) {
+            categoryService.addCategory(inCategory);
+            category = categoryService.getCategoryByName(inCategory);
         }
-        foodAndDrinkService.addFoodAndDrink(name, price,foodAndDrinkType);
+        drinksService.addDrink(name, price, category);
     }
 
     @RequestMapping(value = "/sendMessage/{msg}", method = RequestMethod.GET)
