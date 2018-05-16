@@ -11,6 +11,8 @@ import com.squareup.okhttp.Request;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -40,6 +42,11 @@ public class DrinksRest {
         Category category = categoryService.getCategoryByName(inCategory);
         Gson gson = new Gson();
         return gson.toJson(drinksService.getAllByCategory(category));
+    }
+
+    @RequestMapping(value = "/get503", method = RequestMethod.GET)
+    public ResponseEntity get503() {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
