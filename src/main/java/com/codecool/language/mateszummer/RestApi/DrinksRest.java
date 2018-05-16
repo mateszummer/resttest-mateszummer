@@ -2,7 +2,9 @@ package com.codecool.language.mateszummer.RestApi;
 
 import com.codecool.language.mateszummer.Service.DrinksService;
 import com.codecool.language.mateszummer.Service.CategoryService;
+import com.codecool.language.mateszummer.Service.OrderService;
 import com.codecool.language.mateszummer.model.Category;
+import com.codecool.language.mateszummer.model.Order;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.MediaType;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @RestController
 public class DrinksRest {
@@ -28,6 +31,21 @@ public class DrinksRest {
     DrinksService drinksService;
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    OrderService orderService;
+
+    @RequestMapping(value= "/addOrder", method = RequestMethod.POST)
+    public void addOrder(@RequestParam("orderMap") HashMap<Integer,Integer> orderMap){
+        orderService.addOrder(orderMap);
+    }
+
+    @RequestMapping(value = "/getAllOrder", method = RequestMethod.GET)
+    public String getAllOrder(){
+        Gson gson = new Gson();
+        return gson.toJson(orderService.getAll());
+    }
+
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public String getAll() {

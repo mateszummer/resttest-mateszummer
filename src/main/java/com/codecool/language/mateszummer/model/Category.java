@@ -13,17 +13,19 @@ public class Category {
 
     private String name;
 
-    @OneToMany
-    private transient List<Drinks> drinksList = new ArrayList<Drinks>();
+    public Category() {
+    }
 
     public Category(String name) {
         this.name = name;
     }
 
+    @OneToMany
+    private transient List<Drinks> drinksList = new ArrayList<Drinks>();
+
+
     public void addFoodAndDrink(Drinks drinks) {
         drinksList.add(drinks);
     }
 
-    public Category() {
-    }
 }
