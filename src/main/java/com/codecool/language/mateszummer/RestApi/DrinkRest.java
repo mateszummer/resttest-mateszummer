@@ -1,10 +1,9 @@
 package com.codecool.language.mateszummer.RestApi;
 
-import com.codecool.language.mateszummer.Service.DrinksService;
+import com.codecool.language.mateszummer.Service.DrinkService;
 import com.codecool.language.mateszummer.Service.CategoryService;
 import com.codecool.language.mateszummer.Service.OrderService;
 import com.codecool.language.mateszummer.model.Category;
-import com.codecool.language.mateszummer.model.Order;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.MediaType;
@@ -21,7 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
-public class DrinksRest {
+public class DrinkRest {
 
     @Value("androidKey")
     String androidKey;
@@ -30,7 +29,7 @@ public class DrinksRest {
     String firebaseSrvKey;
 
     @Autowired
-    DrinksService drinksService;
+    DrinkService drinkService;
     @Autowired
     CategoryService categoryService;
 
@@ -52,18 +51,18 @@ public class DrinksRest {
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public String getAll() {
         Gson gson = new Gson();
-        return gson.toJson(drinksService.getAll());
+        return gson.toJson(drinkService.getAll());
     }
 
     @RequestMapping(value = "/getDrinksByCategory/{category}", method = RequestMethod.GET)
     public String getDrinkByCategory(@PathVariable("category") String inCategory) {
         Category category = categoryService.getCategoryByName(inCategory);
         Gson gson = new Gson();
-        return gson.toJson(drinksService.getAllByCategory(category));
+        return gson.toJson(drinkService.getAllByCategory(category));
     }
 
-    @RequestMapping(value = "/get503", method = RequestMethod.GET)
-    public ResponseEntity get503() {
+    @RequestMapping(value = "/get500", method = RequestMethod.GET)
+    public ResponseEntity get500() {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -75,7 +74,7 @@ public class DrinksRest {
 
     @RequestMapping(value = "/deleteDrink", method = RequestMethod.POST)
     public void deleteDrink(@RequestParam("name") String name) {
-        drinksService.deleteDrinkByName(name);
+        drinkService.deleteDrinkByName(name);
     }
 
     @RequestMapping(value = "/deleteCategory", method = RequestMethod.POST)
@@ -92,7 +91,7 @@ public class DrinksRest {
             categoryService.addCategory(inCategory);
             category = categoryService.getCategoryByName(inCategory);
         }
-        drinksService.addDrink(name, price, category);
+        drinkService.addDrink(name, price, category);
     }
 
     @RequestMapping(value = "/sendMessage/{msg}", method = RequestMethod.GET)

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DrinksRepo extends JpaRepository<Drink, Integer>{
+public interface DrinkRepo extends JpaRepository<Drink, Integer>{
 
     Drink getDrinksByNameEquals(String name);
 

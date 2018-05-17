@@ -10,15 +10,15 @@ public class FirebaseClientUser {
     @Id
     private Integer id;
 
-    private Integer table;
+    private Integer tableKey;
     private String appKey;
 
-    public Integer getTable() {
-        return table;
+    public Integer getTableKey() {
+        return tableKey;
     }
 
-    public void setTable(Integer table) {
-        this.table = table;
+    public void setTableKey(Integer tableKey) {
+        this.tableKey = tableKey;
     }
 
     public String getAppKey() {
@@ -28,8 +28,8 @@ public class FirebaseClientUser {
 
     public FirebaseClientUser(){}
 
-    public FirebaseClientUser(Integer table, String appKey) {
-        this.table = table;
+    public FirebaseClientUser(Integer tableKey, String appKey) {
+        this.tableKey = tableKey;
         this.appKey = appKey;
     }
 }
