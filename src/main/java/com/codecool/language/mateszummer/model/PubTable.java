@@ -1,12 +1,9 @@
 package com.codecool.language.mateszummer.model;
 
-
 import javax.persistence.*;
-import java.util.List;
 
-// Here we are going to store, do stuff with the people who are managing the pubs(owners admins etc)
 @Entity
-public class User {
+public class PubTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +11,6 @@ public class User {
 
     private String name;
 
-    @ManyToMany
-    private List<Pub> pubs;
+    @ManyToOne
+    private Pub pub;
 }
