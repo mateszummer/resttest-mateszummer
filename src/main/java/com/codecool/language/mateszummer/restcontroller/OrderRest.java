@@ -1,4 +1,4 @@
-package com.codecool.language.mateszummer.restapi;
+package com.codecool.language.mateszummer.restcontroller;
 
 
 import org.springframework.web.bind.annotation.RestController;

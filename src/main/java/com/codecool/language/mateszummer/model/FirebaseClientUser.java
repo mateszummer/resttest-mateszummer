@@ -3,7 +3,6 @@ package com.codecool.language.mateszummer.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "firebaseClient")
 public class FirebaseClientUser {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
