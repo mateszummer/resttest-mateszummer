@@ -1,6 +1,7 @@
 package com.codecool.language.mateszummer.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Pub {
@@ -12,5 +13,8 @@ public class Pub {
     private String name;
 
     @ManyToMany
-    private User user;
+    private List<User> users;
+
+    @OneToMany
+    private List<Table> tables;
 }

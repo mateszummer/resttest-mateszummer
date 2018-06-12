@@ -1,9 +1,6 @@
 package com.codecool.language.mateszummer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Table {
@@ -13,4 +10,7 @@ public class Table {
     private Integer id;
 
     private String name;
+
+    @ManyToOne
+    private Pub pub;
 }
