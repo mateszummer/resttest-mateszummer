@@ -14,6 +14,6 @@ public class PubUser {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "pubUsers")
     private List<Pub> pubs;
 }
