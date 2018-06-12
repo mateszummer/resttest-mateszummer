@@ -6,13 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
-@Table(name = "asdasd")
+@Table(name = "Order")
 public class Order {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    private String billDate;
 
     public Integer getId() {
         return id;
@@ -38,7 +40,6 @@ public class Order {
 //        this.orderMap = orderMap;
 //    }
 
-    String billDate;
 
 //    public Order(HashMap<Drink,Integer> order) {
 //        orderMap = order;

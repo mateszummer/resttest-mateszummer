@@ -1,7 +1,7 @@
-package com.codecool.language.mateszummer.RestApi;
+package com.codecool.language.mateszummer.restapi;
 
 
-import com.codecool.language.mateszummer.Service.FirebaseClientService;
+import com.codecool.language.mateszummer.service.FirebaseClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

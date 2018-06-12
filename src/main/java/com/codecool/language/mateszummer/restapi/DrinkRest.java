@@ -1,8 +1,8 @@
-package com.codecool.language.mateszummer.RestApi;
+package com.codecool.language.mateszummer.restapi;
 
-import com.codecool.language.mateszummer.Service.DrinkService;
-import com.codecool.language.mateszummer.Service.CategoryService;
-import com.codecool.language.mateszummer.Service.OrderService;
+import com.codecool.language.mateszummer.service.DrinkService;
+import com.codecool.language.mateszummer.service.CategoryService;
+import com.codecool.language.mateszummer.service.OrderService;
 import com.codecool.language.mateszummer.model.Category;
 import com.google.gson.Gson;
 

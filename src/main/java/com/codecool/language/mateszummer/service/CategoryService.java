@@ -1,8 +1,8 @@
-package com.codecool.language.mateszummer.Service;
+package com.codecool.language.mateszummer.service;
 
 
-import com.codecool.language.mateszummer.Repository.CategoryRepo;
-import com.codecool.language.mateszummer.Repository.DrinkRepo;
+import com.codecool.language.mateszummer.repository.CategoryRepository;
+import com.codecool.language.mateszummer.repository.DrinkRepository;
 import com.codecool.language.mateszummer.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.List;
 public class CategoryService {
 
     @Autowired
-    CategoryRepo categoryRepo;
+    CategoryRepository categoryRepo;
 
     @Autowired
-    DrinkRepo drinkRepo;
+    DrinkRepository drinkRepository;
 
     public List<Category> getAll() {
         return categoryRepo.findAll();
@@ -32,7 +32,7 @@ public class CategoryService {
 
     public void deleteCategoryByName(String name) {
         Category category = getCategoryByName(name);
-        drinkRepo.delete(category.getDrinkList());
+        drinkRepository.delete(category.getDrinkList());
         categoryRepo.delete(category);
 
     }

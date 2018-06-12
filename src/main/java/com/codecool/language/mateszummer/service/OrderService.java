@@ -1,8 +1,7 @@
-package com.codecool.language.mateszummer.Service;
+package com.codecool.language.mateszummer.service;
 
-import com.codecool.language.mateszummer.Repository.OrderRepo;
+import com.codecool.language.mateszummer.repository.OrderRepository;
 import com.codecool.language.mateszummer.model.Drink;
-import com.codecool.language.mateszummer.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +17,11 @@ public class OrderService {
     DrinkService drinkService;
 
     @Autowired
-    OrderRepo orderRepo;
+    OrderRepository orderRepository;
 
 
     public List getAll() {
-        return orderRepo.findAll();
+        return orderRepository.findAll();
     }
 
 
@@ -35,6 +34,6 @@ public class OrderService {
             orderMapWithDrink.put(drink, (Integer) pair.getValue());
 
         }
-        //orderRepo.save(new Order(orderMapWithDrink));
+        //orderRepository.save(new Order(orderMapWithDrink));
     }
 }
