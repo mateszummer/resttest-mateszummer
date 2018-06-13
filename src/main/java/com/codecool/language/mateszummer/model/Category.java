@@ -17,6 +17,9 @@ public class Category {
         return drinkList;
     }
 
+    @ManyToMany(mappedBy = "categoriesForPub")
+    private List<Pub> pubsForCategorie;
+
     @OneToMany
     private transient List<Drink> drinkList = new ArrayList<Drink>();
 

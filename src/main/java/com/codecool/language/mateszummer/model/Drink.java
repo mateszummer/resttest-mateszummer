@@ -13,14 +13,15 @@ public class Drink {
     private Integer id;
 
     private String name;
+
     private Integer price;
 
-    public Category getCategory() {
-        return category;
-    }
 
     @ManyToOne
     private Category category;
+
+    @ManyToOne
+    private Pub pub;
 
 
     public Drink() {
@@ -31,6 +32,10 @@ public class Drink {
         this.price = price;
         this.category = category;
         category.addDrinkToCategory(this);
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public Integer getId() {
@@ -50,4 +55,14 @@ public class Drink {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
+    public Pub getPub() {
+        return pub;
+    }
+
+    public void setPub(Pub pub) {
+        this.pub = pub;
+    }
+
+
 }
