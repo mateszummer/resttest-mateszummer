@@ -13,6 +13,22 @@ public class Category {
 
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Item> getDrinksList() {
+        return drinksList;
+    }
+
+    public void setDrinksList(List<Item> drinksList) {
+        this.drinksList = drinksList;
+    }
+
     public Category() {
     }
 
@@ -21,10 +37,9 @@ public class Category {
     }
 
     @OneToMany
-    private transient List<Drinks> drinksList = new ArrayList<Drinks>();
+    private transient List<Item> drinksList = new ArrayList<Item>();
 
-
-    public void addFoodAndDrink(Drinks drinks) {
+    public void addFoodAndDrink(Item drinks) {
         drinksList.add(drinks);
     }
 

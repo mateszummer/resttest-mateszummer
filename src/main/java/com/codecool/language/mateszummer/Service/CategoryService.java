@@ -26,7 +26,7 @@ public class CategoryService {
         categoryRepo.save(new Category(name));
     }
 
-    public void deleteDrinkByName(String name) {
+    public void deleteItemByName(String name){
         categoryRepo.delete(getCategoryByName(name));
     }
 }

@@ -1,7 +1,6 @@
 package com.codecool.language.mateszummer.Service;
 
 import com.codecool.language.mateszummer.Repository.OrderRepo;
-import com.codecool.language.mateszummer.model.Drinks;
 import com.codecool.language.mateszummer.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class OrderService {
     }
 
 
-    public void addOrder(HashMap<Integer,Integer> orderMap) {
+    public void addOrder(HashMap<String,HashMap> orderMap) {
         orderRepo.save(new Order(orderMap));
     }
 }

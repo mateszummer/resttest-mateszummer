@@ -1,10 +1,9 @@
 package com.codecool.language.mateszummer.RestApi;
 
-import com.codecool.language.mateszummer.Service.DrinksService;
+import com.codecool.language.mateszummer.Service.ItemService;
 import com.codecool.language.mateszummer.Service.CategoryService;
 import com.codecool.language.mateszummer.Service.OrderService;
 import com.codecool.language.mateszummer.model.Category;
-import com.codecool.language.mateszummer.model.Order;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.MediaType;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
-public class DrinksRest {
+public class ItemRest {
 
     @Value("androidKey")
     String androidKey;
@@ -28,7 +27,8 @@ public class DrinksRest {
     String firebaseSrvKey;
 
     @Autowired
-    DrinksService drinksService;
+    ItemService itemService;
+
     @Autowired
     CategoryService categoryService;
 
@@ -36,46 +36,53 @@ public class DrinksRest {
     OrderService orderService;
 
     @RequestMapping(value= "/addOrder", method = RequestMethod.POST)
-    public void addOrder(@RequestParam("orderMap") HashMap<Integer,Integer> orderMap){
-        orderService.addOrder(orderMap);
+    public String addOrder(@RequestParam("orderMap") HashMap<String,HashMap> orderMap){
+        //orderService.addOrder(orderMap);
+        Gson gson = new Gson();
+        return gson.toJson("ok");
     }
 
-    @RequestMapping(value = "/getAllOrder", method = RequestMethod.GET)
+    @PostMapping(value = "/addCategory")
+    public void addCategory(@RequestParam("categoryName") String categoryName){
+        categoryService.addCategory(categoryName);
+    }
+
+    @GetMapping(value = "/getAllOrder")
     public String getAllOrder(){
         Gson gson = new Gson();
         return gson.toJson(orderService.getAll());
     }
 
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @GetMapping(value = "/getAll")
     public String getAll() {
         Gson gson = new Gson();
-        return gson.toJson(drinksService.getAll());
+        return gson.toJson(itemService.getAll());
     }
 
-    @RequestMapping(value = "/getDrinksByCategory/{category}", method = RequestMethod.GET)
+    @GetMapping(value = "/getDrinksByCategory/{category}")
     public String getFoodAndDrinkByType(@PathVariable("category") String inCategory) {
         Category category = categoryService.getCategoryByName(inCategory);
         Gson gson = new Gson();
-        return gson.toJson(drinksService.getAllByCategory(category));
+        return gson.toJson(itemService.getAllByCategory(category));
     }
 
-    @RequestMapping(value = "/getTypes", method = RequestMethod.GET)
+    @GetMapping(value = "/getCategories")
     public String getType() {
         Gson gson = new Gson();
         return gson.toJson(categoryService.getAll());
     }
 
-    @RequestMapping(value = "/deleteDrink", method = RequestMethod.POST)
+    @PostMapping(value = "/deleteDrink")
     public void deleteFoodAndDrink(@RequestParam("name") String name) {
-        drinksService.deleteDrinkByName(name);
+        itemService.deleteItemByName(name);
     }
 
-    @RequestMapping(value = "/deleteCategory", method = RequestMethod.POST)
+    @PostMapping(value = "/deleteCategory")
     public void deleteType(@RequestParam("Type") String type) {
-        categoryService.deleteDrinkByName(type);
+        categoryService.deleteItemByName(type);
     }
-
+/*
     @RequestMapping(value = "/addDrink", method = RequestMethod.POST)
     public void addFoodAndDrink(@RequestParam("name") String name,
                                 @RequestParam("price") Integer price,
@@ -85,7 +92,14 @@ public class DrinksRest {
             categoryService.addCategory(inCategory);
             category = categoryService.getCategoryByName(inCategory);
         }
-        drinksService.addDrink(name, price, category);
+        itemService.addDrink(name, price, category);
+    }*/
+
+    @PostMapping(value = "/addItem")
+    public void addFoodAndDrink(@RequestParam("name") String name,
+                                @RequestParam("price") Integer price,
+                                @RequestParam("category") String category) {
+        itemService.addDrink(name, price, categoryService.getCategoryByName(category));
     }
 
     @RequestMapping(value = "/sendMessage/{msg}", method = RequestMethod.GET)

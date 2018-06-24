@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Drinks</title>
+</head>
+<body>
+
+
+<form action="/addItem" method="post">
+    <h3>Add drink</h3>
+    <label>
+        <input type="text" name="name" value="" placeholder="Name"/>
+    </label>
+    <br>Category:</br>
+    <div th:object="${categories}">
+        <label>
+            <select name="category">
+                <option th:each="category : ${categories}"
+                        th:value="${category.name}"
+                        th:text="${category.name}"></option>
+            </select>
+        </label>
+    </div>
+    <label>
+        <input type="text" name="price" value="" placeholder="Price"/>
+    </label>
+    <input type="submit" value="Submit"/>
+</form>
+<form action="/addCategory" method="post">
+    <input id="addCategory" type="text" name="categoryName" value="" placeholder="Add new category"/>
+    <input type="submit" value="Submit category"/>
+</form>
+</body>
+</html>
