@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT  target/language-test-1.1.jar
+web: java -jar -Dserver.port=$PORT  target/language-test-1.0-SNAPSHOT.jar
