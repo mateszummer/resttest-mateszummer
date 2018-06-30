@@ -2,7 +2,6 @@ package com.codecool.language.mateszummer.model;
 
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -13,7 +12,22 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String billDate;
+
+    @OneToMany
+    @Column
+    private List<Item> items;
+
+    @Column(name = "ORDER_DATE")
+    private Date orderDate;
+
+
+
+    public Order() {
+        this.items = new ArrayList<Item>();
+        orderDate= new Date();
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -23,30 +37,18 @@ public class Order {
         this.id = id;
     }
 
-    public String getBill() {
-        return billDate;
-    }
 
-    public void setBillDate(String orderDate) {
-        this.billDate = orderDate;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
 
-//    public Map<Drink, Integer> getOrderMap() {
-//        return orderMap;
-//    }
-//
-//    public void setOrderMap(Map<Drink, Integer> orderMap) {
-//        this.orderMap = orderMap;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
 
-//    public Order(HashMap<Drink,Integer> order) {
-//        orderMap = order;
-//        SimpleDateFormat dateFormatter = new SimpleDateFormat("E, y-M-d 'at' h:m:s a z");
-//        orderDate = dateFormatter.format("now");
-//    }
-
-//    private Map<Drink,Integer> orderMap = new HashMap<>();
-
+    public void addtoItems(Item item) {
+        items.add(item);
+    }
 
 }

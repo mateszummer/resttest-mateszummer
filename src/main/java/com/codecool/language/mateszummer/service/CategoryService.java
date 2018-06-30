@@ -32,7 +32,7 @@ public class CategoryService {
 
     public void deleteCategoryByName(String name) {
         Category category = getCategoryByName(name);
-        drinkRepository.delete(category.getDrinkList());
+        drinkRepository.delete(category.getItemList());
         categoryRepo.delete(category);
 
     }

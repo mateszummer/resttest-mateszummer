@@ -4,11 +4,14 @@ import com.codecool.language.mateszummer.service.DrinkService;
 import com.codecool.language.mateszummer.service.CategoryService;
 import com.codecool.language.mateszummer.service.OrderService;
 import com.codecool.language.mateszummer.model.Category;
+import com.codecool.language.mateszummer.model.Item;
+import com.codecool.language.mateszummer.model.Order;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class DrinkRest {
@@ -36,10 +40,13 @@ public class DrinkRest {
     @Autowired
     OrderService orderService;
 
-    @RequestMapping(value= "/addOrder", method = RequestMethod.POST)
-    public void addOrder(@RequestParam("orderMap") HashMap<Integer,Integer> orderMap){
-        orderService.addOrder(orderMap);
+
+
+    @PostMapping(value = "/addCategory")
+    public void addCategory(@RequestParam("categoryName") String categoryName){
+        categoryService.addCategory(categoryName);
     }
+
 
     @RequestMapping(value = "/getAllOrder", method = RequestMethod.GET)
     public String getAllOrder(){

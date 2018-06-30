@@ -13,25 +13,26 @@ public class Category {
 
     private String name;
 
-    public List<Drink> getDrinkList() {
-        return drinkList;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
     @ManyToMany(mappedBy = "categoriesForPub")
     private List<Pub> pubsForCategorie;
 
     @OneToMany
-    private transient List<Drink> drinkList = new ArrayList<Drink>();
+    private transient List<Item> itemList = new ArrayList<Item>();
 
     public Category(String name) {
         this.name = name;
     }
 
-    public void addDrinkToCategory(Drink drink) {
-        drinkList.add(drink);
+    public void addDrinkToCategory(Item item) {
+        itemList.add(item);
     }
 
-    public void removeDrinkFromCategory(Drink drink) {drinkList.remove(drink);}
+    public void removeDrinkFromCategory(Item item) {
+        itemList.remove(item);}
 
     public Category() {
     }

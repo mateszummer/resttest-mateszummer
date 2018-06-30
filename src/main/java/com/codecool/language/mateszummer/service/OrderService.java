@@ -1,14 +1,14 @@
 package com.codecool.language.mateszummer.service;
 
+import com.codecool.language.mateszummer.model.Item;
+import com.codecool.language.mateszummer.model.Order;
 import com.codecool.language.mateszummer.repository.OrderRepository;
-import com.codecool.language.mateszummer.model.Drink;
+import com.google.gson.Gson;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -24,16 +24,21 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-
-    public void addOrder(HashMap<Integer,Integer> orderMap) {
-        HashMap<Drink, Integer> orderMapWithDrink = new HashMap<>();
-        Iterator it = orderMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            Drink drink = drinkService.getDrinkById((Integer) pair.getKey());
-            orderMapWithDrink.put(drink, (Integer) pair.getValue());
-
+    public boolean addOrder(HashMap<String, String> jsonParams) {
+        Gson gson = new Gson();
+        Order order = new Order();
+        for (Map.Entry<String, String> entry : jsonParams.entrySet()) {
+            Integer itemAmount = gson.fromJson(entry.getValue(), Integer.class);
+            Item itemToOrder = gson.fromJson(entry.getKey(), Item.class);
+            for (int i=0; i<itemAmount; i++) {
+                order.addtoItems(itemToOrder);
+            }
         }
-        //orderRepository.save(new Order(orderMapWithDrink));
+        orderRepository.save(order);
+        if (orderRepository.findAll().contains(order)) {
+            return true;
+        }
+        return false;
+
     }
 }
