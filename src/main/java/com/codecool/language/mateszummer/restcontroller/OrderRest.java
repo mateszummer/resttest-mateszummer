@@ -24,6 +24,8 @@ public class OrderRest {
     @RequestMapping(value= "/addOrder", method = RequestMethod.POST)
     public String addOrder(@RequestParam("params") HashMap<String,String> params){
         ArrayList items = new ArrayList<Item>();
+	System.out.println("sout: " + params);
+	System.err.println(params);
         Gson gson = new Gson();
         HashMap<String, String> jsonParams = gson.fromJson(params.get("orderdetails"), HashMap.class);
         if (orderService.addOrder(jsonParams)) {
