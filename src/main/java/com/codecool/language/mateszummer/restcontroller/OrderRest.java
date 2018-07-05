@@ -22,16 +22,12 @@ public class OrderRest {
     OrderService orderService;
 
     @RequestMapping(value= "/addOrder", method = RequestMethod.POST)
-    public String addOrder(@RequestParam("params") HashMap<String,String> params){
-        ArrayList items = new ArrayList<Item>();
-	System.out.println("sout: " + params);
-	System.err.println(params);
+    public String addOrder(@RequestParam("orderdetails") String orderdetails){
         Gson gson = new Gson();
-        HashMap<String, String> jsonParams = gson.fromJson(params.get("orderdetails"), HashMap.class);
+        HashMap<String, String> jsonParams = gson.fromJson(orderdetails, HashMap.class);
         if (orderService.addOrder(jsonParams)) {
             return "ok";
         }
         return "not ok";
     }
-
 }
